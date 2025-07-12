@@ -1,3 +1,3 @@
 <template>
-  <h1 class="label-invalid">siegggma</h1>
+  <h1 class="label-invalid">Horizon meet</h1>
 </template>

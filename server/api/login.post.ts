@@ -1,10 +1,7 @@
 import {H3Event} from "h3";
-import {PrismaClient} from "@prisma/client";
 import bcrypt from 'bcrypt'
 import {createSession} from "../utils/session";
-
-
-const prisma = new PrismaClient()
+import { prisma } from '../utils/prisma'
 
 export default defineEventHandler(async (event: H3Event) => {
   const body = await readBody(event);

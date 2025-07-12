@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col w-full h-full overflow-hidden border border-gray-200 rounded-lg shadow-sm bg-gray-100">
         <div class="relative h-60">
-            <img
+            <NuxtImg
                     :src="image"
                     class="object-cover w-full h-full absolute inset-0"
                     :alt="`Image of ${title} event.`"

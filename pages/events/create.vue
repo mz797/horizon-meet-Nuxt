@@ -74,7 +74,6 @@ function handleImage(e: Event) {
 async function onSubmit() {
     const result = await createEventSchema.safeParseAsync(form)
 
-    console.log(form, result)
 
     if (!result.success) {
         // map errors
@@ -85,8 +84,6 @@ async function onSubmit() {
         return
     }
 
-    // Clear previous errors
-    console.log(errors)
     if(errors){
         Object.keys(errors).forEach((key) => delete errors[key as keyof typeof errors])
     }
@@ -94,7 +91,6 @@ async function onSubmit() {
     // Submit valid form
     const formData = new FormData()
     Object.entries(result.data).forEach(([key, value]) => {
-        console.log(key, value)
         formData.append(key, value as any)
     })
 

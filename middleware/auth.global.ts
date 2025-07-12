@@ -1,7 +1,8 @@
 import { getCookie } from 'h3'
 import {decrypt} from "../server/utils/session";
+import type {Session} from "../types/session";
 
-export default defineNuxtRouteMiddleware(async (to, from)=>{
+export default defineNuxtRouteMiddleware(async (to, _from)=>{
   const event = useRequestEvent()
 
   if(!event) return
@@ -10,14 +11,12 @@ export default defineNuxtRouteMiddleware(async (to, from)=>{
   const protectedRoutes = ['/events', '/']
   if(protectedRoutes.includes(to.fullPath)) {
     if (!cookie) {
-      console.log(1)
       return navigateTo('/login')
     }
 
-    const session = await decrypt(cookie);
+    const session = (await decrypt(cookie)) as Session
 
     if (!session?.user?.userId) {
-      console.log(2)
       return navigateTo('/login')
     }
 

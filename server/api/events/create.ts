@@ -1,12 +1,5 @@
-import {H3Event} from "h3";
-import {PrismaClient} from "@prisma/client";
-import bcrypt from 'bcrypt'
-import {createSession} from "../../utils/session";
 import {verifySession} from "../../utils/dal";
-
-
-const prisma = new PrismaClient()
-
+import { prisma } from '../../utils/prisma'
 export default defineEventHandler(async (event) => {
   const session = await verifySession(event)
   if (!session || !session.userId) {
@@ -17,14 +10,12 @@ export default defineEventHandler(async (event) => {
   const fields: Record<string, any> = {}
 
   for (const part of form) {
-    console.log(part)
     if (part.name === 'image') {
       fields.image = part
     } else {
       fields[part.name] = part.data.toString()
     }
   }
-  // console.log(fields)
 
   if (!fields.image?.data) {
     throw createError({ statusCode: 400, statusMessage: 'No image picked' })

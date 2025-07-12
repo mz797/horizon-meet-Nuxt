@@ -1,13 +1,11 @@
-import { PrismaClient } from '@prisma/client'
 import { hash } from 'bcrypt'
-import {H3Event} from "h3";
+import {defineEventHandler, H3Event, readBody} from "h3";
 
-const prisma = new PrismaClient()
+import { prisma } from '../utils/prisma'
+
 export default defineEventHandler( async (event: H3Event) => {
   const body = await readBody(event);
   const { name, email, password } = body
-
-  console.log(body);
 
   if (!name || !email || !password) {
     return {

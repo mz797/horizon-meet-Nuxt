@@ -45,6 +45,5 @@ async function onSubmit() {
         method: 'post',
         body: {...credentials}
     })
-    console.log('Submitted:', response)
 }
 </script>
